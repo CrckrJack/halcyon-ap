@@ -74,7 +74,7 @@ function getRaiderArtifactLevels(raiderNames, artifactWeapons) {
     var counter = raiderNames.length;
 
     for (let i = 0; i < raiderNames.length; i++) {
-        fetch('https://us.api.battle.net/wow/character/zuljin/' + raiderNames[i] + '?fields=items&locale=en_US&apikey=nhmm4q7zkyjqxfr3kmbf3crxckdkyk8c')
+        fetch('https://us.api.battle.net/wow/character/zuljin/' + raiderNames[i] + '?fields=items&locale=en_US&apikey=54dubt42v2w3x3vxazrvczzq7ukgfhhy')
             .then(function(response) {
                 return response.json();
             })
