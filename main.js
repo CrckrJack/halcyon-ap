@@ -115,7 +115,7 @@ function getRaiderArtifactLevels(raiderNames, artifactWeapons) {
 
                 }*/
 
-                if (raiderNames[i] == 'Yngvar' || raiderNames[i] == 'Bledgor') {
+                if (raiderNames[i] == 'Yngvar' || raiderNames[i] == 'Bledgor' || raiderNames[i] == 'Abruek') {
                     artifactLevel = -json.items.offHand.relics.length;
                     for (let i = 0; i < json.items.offHand.artifactTraits.length; i++) {
                         artifactLevel = artifactLevel + json.items.offHand.artifactTraits[i].rank;
