@@ -5,7 +5,7 @@ var raiderNames = [
     'Kiiren',
     'Strazi',
 //    'Hexiled',
-    'Abisynth',
+//    'Abisynth',
 //    'Hope',
 //    'Shredi',
 //    'Heathmagus',
@@ -37,7 +37,9 @@ var raiderNames = [
     'Voidglaive',
     'Littlechi',
     'Shocksamson',
-    'Silvarya'
+    'Silvarya',
+    'Hydrógen',
+    'Raorbit',
 ]
 
 var artifactWeapons = {
@@ -92,10 +94,11 @@ function getRaiderArtifactLevels(raiderNames, artifactWeapons) {
                 return response.json();
             })
             .then(function(json) {
-                let artifactLevel = 0;
+                let artifactLevel = -json.items.mainHand.relics.length;
                 let artifactName = '';
 
-                if (json.items.mainHand.artifactTraits.length == 0 && raiderNames[i] != 'Cretox') {
+                // we have to remove a lot of this because 7.2 broke it all
+                /*if (json.items.mainHand.artifactTraits.length == 0 && raiderNames[i] != 'Cretox') {
                     artifactLevel = '< 35';
                     artifactName = 'Noob';
                 } else {
@@ -108,8 +111,14 @@ function getRaiderArtifactLevels(raiderNames, artifactWeapons) {
                         artifactName = json.items.mainHand.name;
                     }
 
-                }
 
+                }*/
+
+                for (let i = 0; i < json.items.mainHand.artifactTraits.length; i++) {
+
+                    artifactLevel = artifactLevel + json.items.mainHand.artifactTraits[i].rank;
+                    artifactName = json.items.mainHand.name;
+                }
                 for (var name in artifactWeapons) {
                     if (artifactName === name) {
                         artifactName = artifactWeapons[artifactName];
