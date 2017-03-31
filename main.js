@@ -75,6 +75,7 @@ var artifactWeapons = {
     'Sharas\'dal, Scepter of Tides': 'Resto',
     'Ulthalesh, the Deadwind Harvester': 'Affliction',
     'Skull of the Man\'ari': 'Demonology',
+    'Spine of Thal\'kiel': 'Demonology',
     'Scepter of Sargeras': 'Destro',
     'Strom\'kar, the Warbreaker': 'Arms',
     'Warswords of the Valarjar': 'Fury',
@@ -94,7 +95,7 @@ function getRaiderArtifactLevels(raiderNames, artifactWeapons) {
                 return response.json();
             })
             .then(function(json) {
-                let artifactLevel = -json.items.mainHand.relics.length;
+                let artifactLevel = 0;
                 let artifactName = '';
 
                 // we have to remove a lot of this because 7.2 broke it all
@@ -114,10 +115,18 @@ function getRaiderArtifactLevels(raiderNames, artifactWeapons) {
 
                 }*/
 
-                for (let i = 0; i < json.items.mainHand.artifactTraits.length; i++) {
-
-                    artifactLevel = artifactLevel + json.items.mainHand.artifactTraits[i].rank;
-                    artifactName = json.items.mainHand.name;
+                if (raiderNames[i] == 'Yngvar' || raiderNames[i] == 'Bledgor') {
+                    artifactLevel = -json.items.offHand.relics.length;
+                    for (let i = 0; i < json.items.offHand.artifactTraits.length; i++) {
+                        artifactLevel = artifactLevel + json.items.offHand.artifactTraits[i].rank;
+                        artifactName = json.items.mainHand.name;
+                    }
+                } else {
+                    artifactLevel = -json.items.mainHand.relics.length;
+                    for (let i = 0; i < json.items.mainHand.artifactTraits.length; i++) {
+                        artifactLevel = artifactLevel + json.items.mainHand.artifactTraits[i].rank;
+                        artifactName = json.items.mainHand.name;
+                    }
                 }
                 for (var name in artifactWeapons) {
                     if (artifactName === name) {
